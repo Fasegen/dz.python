@@ -1,53 +1,49 @@
-# Напишите программу, которая принимает на вход цифру, обозначающую день недели, и проверяет, является ли этот день выходным.
-x = int(input("День недели "))
-if 5<x<8:
-    print("да")
-elif x>7 or x<1:
-    print("Не то число")
-else:
-    print("нет")
+# Вычислить число c заданной точностью d
+n = float(input())
+d = float(input())
+d = str(d)
+d = d.split('.')
+d = len(d[1])
+print(round(n, d))
 
-# 2. Напишите программу, которая принимает на вход координаты точки (X и Y), причём X ≠ 0 и Y ≠ 0 и выдаёт номер четверти плоскости, в которой находится эта точка (или на какой оси она находится).
-x = int(input("Координата X: "))
-y = int(input("Координата Y: "))
+# Задана натуральная степень k. Сформировать случайным образом список коэффициентов (значения от 0 до 100) многочлена и записать в файл многочлен степени k.
+import random
+n = int(input())
+result = [0 for i in range(n)]
+koef = random.sample(range(0, 100), n+1)
+print(f'Коэф: {koef}')
+for i in range(len(result)):
+    result[i] = f'{koef[i]}x^{n}'
+    n -= 1
+result.append(str(koef[-1]))
+print(f'{result}')
+for elem in result:
+    if '^1' in elem:
+        result.remove(elem)
+        result.insert(-1, elem[:elem.find('^1')])
 
-if x == 0 or y == 0:
-    print("ошибка")
-elif x > 0 and y > 0:
-    print("1")
-elif x > 0 and y < 0:
-    print("4")
-elif x < 0 and y > 0:
-    print("2")
-else:
-    print("3")
+print(result)
 
-#  Напишите программу, которая по заданному номеру четверти, показывает диапазон возможных координат точек в этой четверти (x и y).
-x = int(input("Номер четверти: "))
-if x>4 or x< 1:
-    print("Error")
-elif x == 1:
-    print("x > 0; y > 0")
-elif x == 2:
-    print("x < 0; y > 0")
-elif x == 3:
-    print("x < 0; y < 0")
-else:
-    print("x > 0; y < 0")
+# Задайте натуральное число N. Напишите программу, которая составит список простых множителей числа N.
+n = int(input())
+for i in range(2, n // 2 + 1):
+    if n % i == 0:
+        for j in range(2, i // 2 + 1):
+            if i % j == 0:
+                break
+        else:
+            print(i)
 
 
-# Напишите программу, которая принимает на вход координаты двух точек и находит расстояние между ними в 2D пространстве.
-from math import sqrt
-A = list(map(int, input("Введите координаты через запятую: ").split(",")))
-B = list(map(int, input("Введите координаты через запятую: ").split(",")))
-print("A =", A)
-print("B =", B)
-Range = sqrt((A[0]-B[0])**2+(A[1]-B[1])**2)
-print(Range)
-
-# Напишите программу для  проверки истинности утверждения ¬(X ⋁ Y ⋁ Z) = ¬X ⋀ ¬Y ⋀ ¬Z для всех значений предикат.
-for x in (0, 1):
-    for y in (0, 1):
-        for z in (0, 1):
-            print(x, y, z, end=" : ")
-            print(not (x or y or z) == ((not x) and (not y) and (not z)))
+# Задайте последовательность чисел. Напишите программу, которая выведет список неповторяющихся элементов исходной последовательности.
+x = [2, 5, 8, 8, 3, 0, 3, 2]
+y = []
+for i in x:
+    count = 0
+    for j in x:
+        if i == j:
+            count += 1
+        if count == 2:
+            break
+    if count == 1:
+        print(i)
